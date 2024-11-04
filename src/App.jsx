@@ -53,7 +53,7 @@ function App() {
 
     return (
         <div className="App">
-            <h1>To-do List</h1>
+            <h1>My ToDo List</h1>
             {/* Composant pour entrer de nouvelles tâches */}
             <TodoInput addTodo={addTodo} />
             {/* Composant pour filtrer les tâches */}

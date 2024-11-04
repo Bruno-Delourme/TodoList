@@ -1,6 +1,6 @@
 .App {
     text-align: center;
-    font-family: Arial, sans-serif;
+    font-family: 'Proxima', sans-serif;
     max-width: 500px;
     margin: 0 auto;
     padding: 20px;
@@ -8,4 +8,17 @@
 
 h1 {
     color: #333;
+}
+
+/* Importation de Proxima Nova */
+@font-face {
+    font-family: 'Proxima';
+    src: url('./fonts/Proxima.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Application de la police à l'ensemble de l'application */
+body {
+    font-family: 'Proxima', sans-serif;
 }
