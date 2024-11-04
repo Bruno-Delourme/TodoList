@@ -1,24 +1,35 @@
 import PropTypes from 'prop-types';
 import './TodoList.css';
-import TodoItem from '../TodoItem/TodoItem';
 // Composant pour afficher la liste des tâches
-function TodoList({ todos, deleteTodo }) {
+function TodoList({ todos, markAsDone, permanentDelete, toggleTodo, showDeleteButton }) {
     return (
-        <ul>
-            {/* Boucle sur chaque tâche dans le tableau 'todos', et rend un composant TodoItem pour chaque tâche */}
+        <ul className="todo-list">
             {todos.map(todo => (
-                <TodoItem 
-                    key={todo.id} // Utilisation d'une clé unique pour chaque tâche
-                    todo={todo} // Passe la tâche actuelle en tant que prop au composant TodoItem
-                    deleteTodo={deleteTodo} // Passe la fonction deleteTodo en prop pour supprimer une tâche
-                />
+                <li key={todo.id} className={todo.completed ? 'completed' : ''}>
+                    <span onClick={() => toggleTodo(todo.id)}>
+                        {todo.text}
+                    </span>
+                    {!todo.completed && (
+                        <button onClick={() => markAsDone(todo.id)}>
+                            Done
+                        </button>
+                    )}
+                    {showDeleteButton && (
+                        <button onClick={() => permanentDelete(todo.id)}>
+                            Delete
+                        </button>
+                    )}
+                </li>
             ))}
         </ul>
     );
 }
 TodoList.propTypes = {
     todos: PropTypes.array.isRequired,
-    deleteTodo: PropTypes.func.isRequired
+    markAsDone: PropTypes.func.isRequired,
+    permanentDelete: PropTypes.func.isRequired,
+    toggleTodo: PropTypes.func.isRequired,
+    showDeleteButton: PropTypes.bool.isRequired
 };
 
 export default TodoList;
