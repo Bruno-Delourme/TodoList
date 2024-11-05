@@ -1,16 +1,4 @@
-.App {
-    text-align: center;
-    font-family: 'Proxima', sans-serif;
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-h1 {
-    color: #333;
-}
-
-/* Importation de Proxima Nova */
+/* Importation des différentes variantes de Proxima */
 @font-face {
     font-family: 'Proxima';
     src: url('./fonts/Proxima.otf') format('opentype');
@@ -18,7 +6,55 @@ h1 {
     font-style: normal;
 }
 
-/* Application de la police à l'ensemble de l'application */
+/* Variables CSS globales */
+:root {
+    --primary-color: #333;
+    --background-color: #fff;
+    --max-width: 500px;
+}
+
+/* Styles globaux */
 body {
+    font-family: 'Proxima', -apple-system, BlinkMacSystemFont, sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    background-color: var(--background-color);
+    color: var(--primary-color);
+}
+
+.App {
+    text-align: center;
     font-family: 'Proxima', sans-serif;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 20px;
+    width: 95%;
+    box-sizing: border-box;
+}
+
+h1 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin: 1rem 0;
+    word-wrap: break-word;
+    font-weight: normal;
+}
+
+/* Styles pour les inputs et boutons */
+input, button {
+    font-family: 'Proxima', sans-serif;
+}
+
+/* Media queries */
+@media screen and (max-width: 480px) {
+    .App {
+        padding: 15px;
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 1.75rem;
+        margin: 0.75rem 0;
+    }
 }

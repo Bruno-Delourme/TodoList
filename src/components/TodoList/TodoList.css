@@ -2,25 +2,127 @@ ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    
+    width: 100%;
 }
 
 .todo-list li {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 8px;
+    gap: 12px;
+    margin-bottom: 12px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.231);
-    padding: 10px;
+    padding: 12px;
+    flex-wrap: wrap;
 }
 
 .todo-list .completed span {
     text-decoration: line-through;
     color: #888;
+    font-size: 16px;
 }
 
 .todo-list button {
     margin-left: auto;
-    padding: 5px 10px;
+    padding: 8px 15px;
+    min-width: 80px;
+    font-size: 16px;
+    text-align: center;
+}
+
+@media screen and (max-width: 480px) {
+    .todo-list li {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 15px;
+        gap: 10px;
+    }
+
+    .todo-list button {
+        margin-left: 0;
+        width: 100%;
+        padding: 10px;
+    }
+
+    .todo-list span {
+        width: 100%;
+        word-break: break-word;
+    }
+}
+
+.todo-list {
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.todo-form {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.todo-item {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .todo-list {
+        padding: 20px 15px;
+        width: 100%;
+    }
+
+    .todo-form {
+        width: 100%;
+        margin: 0 auto 20px auto;
+    }
+
+    .todo-form input {
+        padding: 12px;
+        font-size: 16px;
+        min-height: 44px;
+    }
+
+    .todo-form button {
+        padding: 12px 20px;
+        min-height: 44px;
+        min-width: 44px;
+        font-size: 16px;
+    }
+
+    .todos-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+
+    .todo-item {
+        width: 100%;
+        padding: 12px;
+        margin: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+    }
+
+    /* Pour les boutons dans les todos */
+    .todo-item button {
+        min-height: 44px;
+        min-width: 44px;
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    /* Si vous avez une checkbox */
+    .todo-item input[type="checkbox"] {
+        min-width: 24px;
+        min-height: 24px;
+    }
 }

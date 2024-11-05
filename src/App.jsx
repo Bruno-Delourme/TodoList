@@ -1,74 +1,77 @@
-import './App.css';
 import { useState } from 'react';
-
-import TodoInput from './components/TodoInput/TodoInput';
-import TodoList from './components/TodoList/TodoList';
-import TodoFilter from './components/TodoFilter/TodoFilter';
+import GroupManager from './components/GroupManager/GroupManager';
+import TaskManager from './components/TaskManager/TaskManager';
+import './App.css';
 
 function App() {
-    // Déclaration de l'état pour stocker les tâches
     const [todos, setTodos] = useState([]);
-    const [filter, setFilter] = useState('all');
-    // Fonction pour ajouter une nouvelle tâche
+    const [groups, setGroups] = useState([]);
+    const [selectedGroup, setSelectedGroup] = useState(null);
+
+    const addGroup = (name) => {
+        const newGroup = {
+            id: Date.now().toString(),
+            name: name
+        };
+        setGroups([...groups, newGroup]);
+    };
+
+    const deleteGroup = (groupId) => {
+        setGroups(groups.filter(group => group.id !== groupId));
+        setTodos(todos.filter(todo => todo.groupId !== groupId));
+        if (selectedGroup === groupId) {
+            setSelectedGroup(null);
+        }
+    };
+
+    const deleteTodo = (todoId) => {
+        setTodos(todos.filter(todo => todo.id !== todoId));
+    };
+
+    const toggleTodo = (todoId) => {
+        setTodos(todos.map(todo =>
+            todo.id === todoId
+                ? { ...todo, completed: !todo.completed }
+                : todo
+        ));
+    };
+
     const addTodo = (text) => {
-        // Création d'un objet représentant une tâche avec un identifiant unique, un texte, et un statut non terminé
-        const newTodo = { id: Date.now(), text, completed: false };
-        // Mise à jour de l'état en ajoutant la nouvelle tâche à la liste existante
+        const newTodo = {
+            id: Date.now().toString(),
+            text,
+            completed: false,
+            groupId: selectedGroup
+        };
         setTodos([...todos, newTodo]);
     };
 
-    // Renommer deleteTodo en markAsDone
-    const markAsDone = (id) => {
-        setTodos(
-            todos.map(todo =>
-                todo.id === id ? { ...todo, completed: true } : todo
-            )
-        );
-    };
-
-    // Ajouter une nouvelle fonction pour la suppression définitive
-    const permanentDelete = (id) => {
-        setTodos(todos.filter(todo => todo.id !== id));
-    };
-
-    const toggleTodo = (id) => {
-        setTodos(
-            todos.map(todo => 
-                todo.id === id ? { ...todo, completed: !todo.completed } : todo
-            )
-        );
-    };
-
-    // Filtrer les tâches selon le critère sélectionné
     const filteredTodos = todos.filter(todo => {
-        switch(filter) {
-            case 'completed':
-                return todo.completed === true;
-            case 'incomplete':
-                return todo.completed === false;
-            default:
-                return true;
+        if (selectedGroup && todo.groupId !== selectedGroup) {
+            return false;
         }
+        return true;
     });
 
     return (
         <div className="App">
-            <h1>My ToDo List</h1>
-            {/* Composant pour entrer de nouvelles tâches */}
-            <TodoInput addTodo={addTodo} />
-            {/* Composant pour filtrer les tâches */}
-            <TodoFilter filter={filter} setFilter={setFilter} />
-            {/* Composant pour afficher et suppprimer des tâches */}
-            <TodoList 
-                todos={filteredTodos} 
-                markAsDone={markAsDone}
-                permanentDelete={permanentDelete}
-                toggleTodo={toggleTodo}
-                showDeleteButton={filter === 'completed'} 
+            <h1>Todo List</h1>
+            <GroupManager
+                groups={groups}
+                onAddGroup={addGroup}
+                onDeleteGroup={deleteGroup}
+                onSelectGroup={setSelectedGroup}
+                selectedGroup={selectedGroup}
+            />
+            <TaskManager
+                selectedGroup={selectedGroup}
+                onAddTask={addTodo}
+                tasks={filteredTodos}
+                onDeleteTask={deleteTodo}
+                onToggleTask={toggleTodo}
             />
         </div>
     );
 }
 
-export default App;
-
+export default App; 
