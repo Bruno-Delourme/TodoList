@@ -68,7 +68,7 @@ function GroupManager({ groups, onAddGroup, onDeleteGroup, onSelectGroup, select
                     className={`group-button ${!selectedGroup ? 'active' : ''}`}
                     onClick={() => onSelectGroup(null)}
                 >
-                    Toutes les tâches
+                    Tout
                 </button>
                 {groups.map(group => (
                     <div key={group.id} className="group-item">

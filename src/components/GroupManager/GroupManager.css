@@ -32,6 +32,11 @@
     font-size: 16px;
 }
 
+.group-form button:hover {
+    background: linear-gradient(0deg, #4a9d6f 0%, #84e3b1 100%);
+    transition: all 0.2s ease;
+}
+
 .group-form button:disabled {
     background-color: #cccccc;
     cursor: not-allowed;
@@ -54,18 +59,28 @@
     padding: 12px 20px;
     min-height: 44px;
     min-width: 44px;
-    background: linear-gradient(0deg, #5c91a3 0%, #1f6d93 100%);
+    background: linear-gradient(0deg, #005dd6 0%, #24b6ff 100%);
     border: 1px solid #ddd;
     border-radius: 4px;
     cursor: pointer;
-    color: #333;
+    color: #ffffff;
     font-size: 16px;
+}
+
+.group-button:hover {
+    background: linear-gradient(0deg, #0070ff 0%, #45c5ff 100%);
+    transition: all 0.2s ease;
 }
 
 .group-button.active {
     background: linear-gradient(0deg, #3aa96a 0%, #3ddb81 100%);
     color: white;
     
+}
+
+.group-button.active:hover {
+    background: linear-gradient(0deg, #45c57d 0%, #4eec92 100%);
+    transition: all 0.2s ease;
 }
 
 .delete-group {
@@ -84,7 +99,8 @@
 }
 
 .delete-group:hover {
-    background: linear-gradient(0deg, #36b56d 0%, #6fd39a 100%);
+    background: linear-gradient(0deg, #4a9d6f 0%, #84e3b1 100%);
+    transition: all 0.2s ease;
 }
 
 .max-groups-warning {
@@ -139,9 +155,18 @@
     font-size: 16px;
 }
 
+.modal-button:hover {
+    transition: all 0.2s ease;
+    opacity: 0.9;
+}
+
 .modal-button.confirm {
     background: linear-gradient(0deg, #5ca36a 0%, #158e44 100%);
     color: white;
+}
+
+.modal-button.confirm:hover {
+    background: linear-gradient(0deg, #6db47d 0%, #1da654 100%);
 }
 
 .modal-button.cancel {
@@ -150,8 +175,8 @@
     color: #333;
 }
 
-.modal-button:hover {
-    opacity: 0.9;
+.modal-button.cancel:hover {
+    background-color: #e9ecef;
 }
 
 @media (max-width: 768px) {
