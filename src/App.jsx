@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import GroupManager from './components/GroupManager/GroupManager';
 import TaskManager from './components/TaskManager/TaskManager';
+import ThemeToggle from './components/ThemeToggle/ThemeToggle';
 import './App.css';
 
 function App() {
@@ -55,21 +56,24 @@ function App() {
 
     return (
         <div className="App">
-            <h1>Todo List</h1>
-            <GroupManager
-                groups={groups}
-                onAddGroup={addGroup}
-                onDeleteGroup={deleteGroup}
-                onSelectGroup={setSelectedGroup}
-                selectedGroup={selectedGroup}
-            />
-            <TaskManager
-                selectedGroup={selectedGroup}
-                onAddTask={addTodo}
-                tasks={filteredTodos}
-                onDeleteTask={deleteTodo}
-                onToggleTask={toggleTodo}
-            />
+            <ThemeToggle />
+            <div className="content">
+                <h1>Todo List</h1>
+                <GroupManager
+                    groups={groups}
+                    onAddGroup={addGroup}
+                    onDeleteGroup={deleteGroup}
+                    onSelectGroup={setSelectedGroup}
+                    selectedGroup={selectedGroup}
+                />
+                <TaskManager
+                    selectedGroup={selectedGroup}
+                    onAddTask={addTodo}
+                    tasks={filteredTodos}
+                    onDeleteTask={deleteTodo}
+                    onToggleTask={toggleTodo}
+                />
+            </div>
         </div>
     );
 }

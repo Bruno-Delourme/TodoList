@@ -1,1 +1,58 @@
+:root {
+  /* Mode clair (défaut) */
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --card-background: #f5f5f5;
+  --border-color: #ddd;
+}
 
+[data-theme='dark'] {
+  /* Mode sombre */
+  --background-color: #1a1a1a;
+  --text-color: #ffffff;
+  --shadow-color: rgba(255, 255, 255, 0.1);
+  --card-background: #2d2d2d;
+  --border-color: #444;
+}
+
+body, 
+#root,
+.App {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--background-color) !important;
+  color: var(--text-color) !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Style pour le bouton de thème */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #4a90e2;
+  border: none;
+  cursor: pointer;
+  color: white;
+  box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+/* Pour préserver les couleurs des boutons */
+button:not(.theme-toggle) {
+  /* Vos styles de bouton existants */
+  background-color: #4a90e2;
+  color: white;
+}
+
+.card {
+  background-color: var(--card-background);
+  border: 1px solid var(--border-color);
+}

@@ -2,7 +2,13 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import './GroupManager.css';
 
-function GroupManager({ groups, onAddGroup, onDeleteGroup, onSelectGroup, selectedGroup }) {
+const GroupManager = ({
+    groups = [],
+    onAddGroup = () => {},
+    onDeleteGroup = () => {},
+    onSelectGroup = () => {},
+    selectedGroup = null
+}) => {
     const [newGroupName, setNewGroupName] = useState('');
     const [showMaxGroupsWarning, setShowMaxGroupsWarning] = useState(false);
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
@@ -108,7 +114,7 @@ function GroupManager({ groups, onAddGroup, onDeleteGroup, onSelectGroup, select
             )}
         </div>
     );
-}
+};
 
 GroupManager.propTypes = {
     groups: PropTypes.arrayOf(
@@ -121,10 +127,6 @@ GroupManager.propTypes = {
     onDeleteGroup: PropTypes.func.isRequired,
     onSelectGroup: PropTypes.func.isRequired,
     selectedGroup: PropTypes.string
-};
-
-GroupManager.defaultProps = {
-    selectedGroup: null
 };
 
 export default GroupManager; 
