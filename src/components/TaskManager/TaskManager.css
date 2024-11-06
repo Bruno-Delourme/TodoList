@@ -110,4 +110,51 @@
 
 .delete-task-btn:hover {
     background-color: #c72f3f69;
+}
+
+.task-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.task-form input {
+    flex: 1;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    height: 44px;
+    box-sizing: border-box;
+}
+
+.task-form button {
+    padding: 12px 20px;
+    background: radial-gradient(circle, #3b875c 0%, #6fd39a 100%);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 44px;
+    min-width: 44px;
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .task-manager {
+        padding: 20px 15px;
+        width: 100%;
+    }
+
+    .task-form {
+        width: 100%;
+        margin: 0 auto 20px auto;
+    }
+
+    .task-form input {
+        width: 100%;
+        min-height: 44px;
+    }
 } 
