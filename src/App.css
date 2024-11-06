@@ -18,7 +18,7 @@
 }
 
 [data-theme='dark'] {
-    --bg-gradient: linear-gradient(0deg, #080808 0%, #024769 100%);
+    --bg-gradient: linear-gradient(0deg, #042637 0%, #111422 100%);
     --text-color: #ffffff;
     --title-color: #ffffff;
     --card-bg: rgba(255, 255, 255, 0.1);
