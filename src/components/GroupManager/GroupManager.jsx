@@ -10,9 +10,13 @@ function GroupManager({ groups, onAddGroup, onDeleteGroup, onSelectGroup, select
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (newGroupName.trim() && groups.length < 5) {
-            onAddGroup(newGroupName.trim());
-            setNewGroupName('');
+        if (newGroupName.trim()) {
+            if (groups.length < 5) {
+                onAddGroup(newGroupName.trim());
+                setNewGroupName('');
+            } else {
+                setShowMaxGroupsWarning(true);
+            }
         }
     };
 
@@ -48,18 +52,8 @@ function GroupManager({ groups, onAddGroup, onDeleteGroup, onSelectGroup, select
             </form>
             
             {showMaxGroupsWarning && (
-                <div className="modal-overlay">
-                    <div className="modal-content">
-                        <div className="modal-message">
-                            Vous avez atteint le nombre maximum de groupes autorisés (5).
-                        </div>
-                        <button 
-                            className="modal-button" 
-                            onClick={() => setShowMaxGroupsWarning(false)}
-                        >
-                            Compris
-                        </button>
-                    </div>
+                <div className="max-groups-warning">
+                    Vous avez atteint la limite maximale de 5 groupes.
                 </div>
             )}
 
