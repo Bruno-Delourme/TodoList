@@ -139,6 +139,7 @@
 .modal-message {
     margin-bottom: 20px;
     text-align: center;
+    color: rgb(61, 61, 61);
 }
 
 .modal-buttons {

@@ -1,14 +1,49 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { auth, db } from './firebase';
+import { onAuthStateChanged } from 'firebase/auth';
 import GroupManager from './components/GroupManager/GroupManager';
 import TaskManager from './components/TaskManager/TaskManager';
 import ThemeToggle from './components/ThemeToggle/ThemeToggle';
+import Auth from './components/Auth/Auth';
 import './App.css';
 
 function App() {
+    const [user, setUser] = useState(null);
+    const [showAuth, setShowAuth] = useState(false);
+    const [showInstallPrompt, setShowInstallPrompt] = useState(false);
+    const [deferredPrompt, setDeferredPrompt] = useState(null);
     const [todos, setTodos] = useState([]);
     const [groups, setGroups] = useState([]);
     const [selectedGroup, setSelectedGroup] = useState(null);
 
+    // Gérer l'installation PWA
+    useEffect(() => {
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            setDeferredPrompt(e);
+            setShowInstallPrompt(true);
+        });
+    }, []);
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            setUser(user);
+        });
+        return () => unsubscribe();
+    }, []);
+
+    const handleInstall = async () => {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            if (outcome === 'accepted') {
+                setShowInstallPrompt(false);
+            }
+            setDeferredPrompt(null);
+        }
+    };
+
+    // Vos fonctions existantes
     const addGroup = (name) => {
         const newGroup = {
             id: Date.now().toString(),
@@ -57,8 +92,18 @@ function App() {
     return (
         <div className="App">
             <ThemeToggle />
+            {showAuth && <Auth onClose={() => setShowAuth(false)} />}
+            
+            <header className="header">
+                <h1>TodoList</h1>
+                {user ? (
+                    <button onClick={() => auth.signOut()}>Déconnexion</button>
+                ) : (
+                    <button onClick={() => setShowAuth(true)}>Connexion</button>
+                )}
+            </header>
+
             <div className="content">
-                <h1>Todo List</h1>
                 <GroupManager
                     groups={groups}
                     onAddGroup={addGroup}
@@ -74,6 +119,14 @@ function App() {
                     onToggleTask={toggleTodo}
                 />
             </div>
+
+            {showInstallPrompt && (
+                <div className="install-prompt">
+                    <p>Installer l'application ?</p>
+                    <button onClick={handleInstall}>Installer</button>
+                    <button onClick={() => setShowInstallPrompt(false)}>Plus tard</button>
+                </div>
+            )}
         </div>
     );
 }
