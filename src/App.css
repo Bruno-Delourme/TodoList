@@ -22,7 +22,6 @@
 [data-theme='dark'] {
     /* Thème sombre */
     --bg-gradient: linear-gradient(0deg, #042637 0%, #111422 100%);
-    --bg-color: #1a1a1a;
     --text-color: #303030;
     --title-color: #ffffff;
     --card-bg: rgba(254, 254, 254, 0.9);
