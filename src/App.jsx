@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { auth, db } from './firebase';
+import { auth } from './firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import GroupManager from './components/GroupManager/GroupManager';
 import TaskManager from './components/TaskManager/TaskManager';
@@ -97,9 +97,9 @@ function App() {
             <header className="header">
                 <h1>TodoList</h1>
                 {user ? (
-                    <button onClick={() => auth.signOut()}>Déconnexion</button>
+                    <button onClick={() => auth.signOut()}>Déco</button>
                 ) : (
-                    <button onClick={() => setShowAuth(true)}>Connexion</button>
+                    <button onClick={() => setShowAuth(true)}>Co</button>
                 )}
             </header>
 
@@ -122,7 +122,7 @@ function App() {
 
             {showInstallPrompt && (
                 <div className="install-prompt">
-                    <p>Installer l'application ?</p>
+                    <p>Installer l&apos;application ?</p>
                     <button onClick={handleInstall}>Installer</button>
                     <button onClick={() => setShowInstallPrompt(false)}>Plus tard</button>
                 </div>

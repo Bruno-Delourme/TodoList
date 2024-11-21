@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { auth } from '../../firebase';
 import { 
@@ -8,8 +9,9 @@ import {
     createUserWithEmailAndPassword 
 } from 'firebase/auth';
 import './Auth.css';
+import { FaTimes } from 'react-icons/fa';
 
-const Auth = () => {
+const Auth = ({ onClose }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isRegistering, setIsRegistering] = useState(false);
@@ -54,6 +56,13 @@ const Auth = () => {
     return (
         <div className="auth-container">
             <div className="auth-box">
+                <button 
+                    className="close-auth" 
+                    onClick={onClose}
+                    aria-label="Fermer"
+                >X
+                    <FaTimes />
+                </button>
                 <h2>{isRegistering ? 'Inscription' : 'Connexion'}</h2>
                 {error && <p className="error">{error}</p>}
                 
@@ -108,6 +117,10 @@ const Auth = () => {
             </div>
         </div>
     );
+};
+
+Auth.propTypes = {
+    onClose: PropTypes.func.isRequired
 };
 
 export default Auth;

@@ -8,20 +8,26 @@
 
 /* Variables CSS globales */
 :root {
-    --primary-color: #333;
-    --background-color: #fff;
-    --max-width: 500px;
+    /* Thème clair par défaut */
+    --bg-gradient: linear-gradient(0deg, #ffffff 0%, #f5f5f5 100%);
     --bg-color: #ffffff;
     --text-color: #333333;
     --title-color: #024769;
     --card-bg: #f5f5f5;
+    --input-bg: #ffffff;
+    --input-border: #ddd;
+    --button-gradient: linear-gradient(0deg, #3b875c 0%, #6fd39a 100%);
 }
 
 [data-theme='dark'] {
+    /* Thème sombre */
     --bg-gradient: linear-gradient(0deg, #042637 0%, #111422 100%);
-    --text-color: #ffffff;
+    --bg-color: #1a1a1a;
+    --text-color: #303030;
     --title-color: #ffffff;
-    --card-bg: rgba(255, 255, 255, 0.1);
+    --card-bg: rgba(254, 254, 254, 0.9);
+    --input-bg: #fbfbfb;
+    --input-border: #444;
 }
 
 /* Styles globaux */
@@ -30,8 +36,8 @@ body {
     margin: 0;
     padding: 0;
     font-size: 16px;
-    background-color: var(--background-color);
-    color: var(--primary-color);
+    background-color: var(--bg-gradient);
+    color: var(--text-color);
 }
 
 .App {
@@ -43,7 +49,7 @@ body {
     width: 95%;
     box-sizing: border-box;
     min-height: 100vh;
-    background: var(--bg-gradient, var(--bg-color));
+    background: var(--bg-gradient);
     color: var(--text-color);
     transition: color 0.3s ease;
 }
@@ -103,7 +109,7 @@ p, span, div {
 
 /* Correction du gradient des boutons */
 button:not(.theme-toggle) {
-    background: linear-gradient(0deg, #3b875c 0%, #6fd39a 100%);
+    background: var(--button-gradient);
     color: white;
     border: none;
     padding: 8px 16px;
@@ -134,4 +140,67 @@ button:not(.theme-toggle):hover {
     cursor: pointer;
     color: white;
     z-index: 1000;
+}
+
+/* Applications globales */
+input, textarea, select {
+    background-color: var(--input-bg);
+    border-color: var(--input-border);
+    color: var(--text-color);
+}
+
+.card, .task-item, .modal-message {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+}
+
+/* Style pour le header */
+.header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    z-index: 999;
+}
+
+.header h1 {
+    display: none; /* Cache le titre TodoList car il sera affiché ailleurs */
+}
+
+.header button {
+    position: fixed;
+    top: 20px;
+    right: 80px; /* Espace pour le theme toggle */
+    padding: 10px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--button-gradient);
+    border: none;
+    cursor: pointer;
+    color: white;
+    z-index: 1000;
+}
+
+/* Ajustement pour le responsive */
+@media screen and (max-width: 480px) {
+    .header button {
+        top: 10px;
+        right: 70px;
+        width: 35px;
+        height: 35px;
+    }
+
+    .theme-toggle {
+        top: 10px;
+        right: 20px;
+        width: 35px;
+        height: 35px;
+    }
 }
